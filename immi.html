@@ -1,0 +1,138 @@
+Voici une version unifiée du code avec l'ajout d'images du Canada en arrière-plan pour donner une touche visuelle unique au formulaire.
+
+### Code HTML/CSS/PHP (index.php)
+
+```php
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission - Pascal le Boulanger</title>
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://example.com/canada_background.jpg'); /* Remplacer par une URL d'image du Canada */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Conteneur du formulaire */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9); /* Légère transparence */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        form input[type="text"],
+        form input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6666;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Message de suspension */
+        .message-suspension {
+            background-color: #ffe6e6;
+            color: #b30000;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .message-suspension p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulaire d'Admission - Pascal le Boulanger</h1>
+        
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Récupération des données envoyées par l'utilisateur
+            $nom = htmlspecialchars($_POST['nom']);
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $email = htmlspecialchars($_POST['email']);
+
+            // Affichage du message de suspension du dossier
+            echo "<div class='message-suspension'>
+                    <p>Bonjour <strong>$prenom $nom</strong>,</p>
+                    <p>Votre dossier d'admission est en <strong>suspens</strong> en raison de l'absence ou l'insuffisance de votre résultat TCF.</p>
+                    <p>Veuillez nous fournir votre attestation de TCF pour que nous puissions finaliser votre admission.</p>
+                    <p>Merci de votre compréhension,</p>
+                    <p><em>L'équipe de Pascal le Boulanger</em></p>
+                  </div>";
+        } else {
+            // Formulaire de soumission
+            echo "<form method='POST' action=''>
+                    <label for='nom'>Nom:</label>
+                    <input type='text' id='nom' name='nom' required>
+                    
+                    <label for='prenom'>Prénom:</label>
+                    <input type='text' id='prenom' name='prenom' required>
+                    
+                    <label for='email'>Email:</label>
+                    <input type='email' id='email' name='email' required>
+                    
+                    <input type='submit' value='Soumettre'>
+                  </form>";
+        }
+        ?>
+    </div>
+</body>
+</html>
+```
+
+### Explication
+
+- **Background Image** : Une image du Canada est appliquée comme arrière-plan via `background-image` (remplacer `https://example.com/canada_background.jpg` par l'URL réelle de l'image).
+- **Conteneur Transparent** : Le conteneur du formulaire a un fond légèrement transparent (`rgba(255, 255, 255, 0.9)`) pour mettre en évidence le texte tout en permettant à l'image de l’arrière-plan de transparaître.
+- **Message de Suspension** : Si le formulaire est soumis, un message personnalisé est affiché pour informer l’employé de la suspension de son dossier. 
+
+Cela offre une interface visuelle attrayante tout en conservant les fonctionnalités demandées.
